@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import {
   SidebarGroup,
   SidebarGroupContent,
@@ -6,6 +6,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { useAuth, useClerk } from "@clerk/nextjs";
 import { FlameIcon, HomeIcon, PlaySquareIcon } from "lucide-react";
 import Link from "next/link";
 import React from "react";
@@ -30,6 +31,8 @@ const items = [
 ];
 
 const MainSection = () => {
+  const { isSignedIn } = useAuth();
+  const clerk = useClerk();
   return (
     <SidebarGroup>
       <SidebarGroupContent>
@@ -38,7 +41,12 @@ const MainSection = () => {
             <SidebarMenuItem key={item.title}>
               <SidebarMenuButton
                 isActive={false}
-                onClick={() => {}} // Todo Do something on click
+                onClick={(e) => {
+                  if (!isSignedIn && item.auth) {
+                    e.preventDefault();
+                    return clerk.openSignIn();
+                  }
+                }} 
                 tooltip={item.title} // Todo Change to look at current pathname
                 asChild
               >
