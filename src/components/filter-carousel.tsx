@@ -57,9 +57,9 @@ export const FilterCarousel = ({
         }}
         className="w-full px-12"
       >
-        <CarouselContent className="-ml-3">
+        <CarouselContent  className="-ml-3">
           {!isLoading && (
-            <CarouselItem className="pl-3 basis-auto" onClick={()=>onSelect(null)}>
+            <CarouselItem  className="pl-3 basis-auto" onClick={()=>onSelect(null)}>
               <Badge
                 variant={!value ? "default" : "secondary"}
                 className="rounded-lg px-3 py-1  cursor-pointer text-sm whitespace-nowrap"
